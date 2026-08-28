@@ -1,11 +1,13 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+
 
 app = FastAPI()
 
-class NameRequest(BaseModel):
-    name: str
+@app.get("/")
+def root():
+    return {"message": "Welcome to my FastAPI app!"}
+
 
 @app.post("/greet")
-def greet_user(request: NameRequest):
-    return {"message": f"Hello, {request.name}!"}
+def greet_user(name: str):
+    return {"message": f"Hello, {name}!"}
